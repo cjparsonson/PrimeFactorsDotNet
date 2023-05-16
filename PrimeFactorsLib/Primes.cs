@@ -40,5 +40,56 @@
             }
             return factors;
         }
+
+        public static List<int> PrimeFactorsList(int number)
+        {
+            List<int> results = new List<int>();
+            foreach (int divisor in PrimeNumbers)
+            {
+                int remainder;
+                do
+                {
+                    remainder = number % divisor;
+                    if (remainder == 0)
+                    {
+                        number /= divisor;
+                        if (number == 1)
+                        {
+                            results.Add(divisor);
+                            break;
+                        }
+                        else
+                        {
+                            results.Add(divisor);
+                        }
+                    }
+                } while(remainder == 0);
+            }
+            return results;
+        }
+
+        public static int LowestCommonFactor(int operandA, int operandB)
+        {
+            List<int> resultA = PrimeFactorsList(operandA);
+            List<int> resultB = PrimeFactorsList(operandB);
+
+            int lowestFactor = 0;
+
+            foreach (int x in resultA)
+            {
+                foreach (int y in resultB)
+                {
+                    if (x == y)
+                    {
+                        lowestFactor = x;
+                    }
+                }
+                if (lowestFactor != 0)
+                {
+                    return lowestFactor;
+                }
+            }
+
+        }
     }
 }
